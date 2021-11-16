@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Transaction = require("../models/transaction.js");
+const Transaction = require("../models/transaction");
 
 router.post("/api/transaction", ({body}, res) => {
   Transaction.create(body)
@@ -27,6 +27,7 @@ router.get("/api/transaction", (req, res) => {
       res.json(dbTransaction);
     })
     .catch(err => {
+      console.log("here is the error")
       res.status(404).json(err);
     });
 });

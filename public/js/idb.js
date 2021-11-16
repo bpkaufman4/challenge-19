@@ -1,3 +1,4 @@
+
 let db;
 
 const request = indexedDB.open('budget', 1);
@@ -11,7 +12,7 @@ request.onsuccess = function(event) {
     db = event.target.result;
 
     if (navigator.onLine) {
-        uploadData();
+        // uploadData();
     }
 };
 
@@ -36,23 +37,22 @@ function uploadData() {
 
     getAll.onsuccess = function() {
         if (getAll.result.length > 0) {
-            fetch("/api/transaction", {
-                method: "POST",
+            fetch('/api/transaction', {
+                method: 'POST',
                 body: JSON.stringify(getAll.result),
                 headers: {
-                  Accept: "application/json, text/plain, */*",
-                  "Content-Type": "application/json"
+                    Accept: 'application/json, text/plain, */*',
+                    'Content-type': 'application/json'
                 }
-              })
+            })
                 .then(response => response.json())
                 .then(serverResponse => {
                     if (serverResponse.message) {
                         throw new Error(serverResponse);
                     }
 
-                    const transaction = db.transaction(['new_datapoint'], 'readwrite');
+                    const transaction = db.transaction(['new_datapoint', 'readwrite']);
                     const dataObjectStore = transaction.objectStore('new_datapoint');
-                    console.log(dataObjectStore);
                     dataObjectStore.clear();
 
                     alert('All saved transactions have been submitted')
@@ -64,4 +64,4 @@ function uploadData() {
     }
 }
 
-window.addEventListener('online', uploadData);
+window.addEventListener('online', uploadData)
