@@ -8,8 +8,6 @@ const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/budget";
 
 const app = express();
 
-// routes
-app.use(require("./routes/api"));
 
 app.use(logger("dev"));
 
@@ -24,6 +22,8 @@ mongoose.connect(MONGODB_URI, {
   useFindAndModify: false
 });
 
+// routes
+app.use(require("./routes/api"));
 
 
 app.listen(PORT, () => {
