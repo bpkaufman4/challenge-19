@@ -19,7 +19,7 @@ request.onerror = function(event) {
     console.log(event.target.errorCode);
 }
 
-function saveData(record) {
+function saveRecord(record) {
     const transaction = db.transaction(['new_datapoint'], 'readwrite');
   
     const dataObjectStore = transaction.objectStore('new_datapoint');

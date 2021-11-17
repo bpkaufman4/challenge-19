@@ -83,7 +83,6 @@ function sendTransaction(isAdding) {
   let amountEl = document.querySelector("#t-amount");
   let errorEl = document.querySelector(".form .error");
 
-
   // validate form
   if (nameEl.value === "" || amountEl.value === "") {
     errorEl.textContent = "Missing Information";
@@ -114,12 +113,12 @@ function sendTransaction(isAdding) {
   populateTotal();
   
   // also send to server
-  fetch('/api/transaction', {
-    method: 'POST',
+  fetch("/api/transaction", {
+    method: "POST",
     body: JSON.stringify(transaction),
     headers: {
-        Accept: 'application/json, text/plain, */*',
-        'Content-type': 'application/json'
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json"
     }
   })
   .then(response => {    
@@ -137,7 +136,7 @@ function sendTransaction(isAdding) {
   })
   .catch(err => {
     // fetch failed, so save in indexed db
-    saveData(transaction);
+    saveRecord(transaction);
 
     // clear form
     nameEl.value = "";

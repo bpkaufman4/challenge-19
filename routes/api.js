@@ -1,8 +1,8 @@
 const router = require("express").Router();
-const Transaction = require("../models/transaction.js");
+const Transaction = require("../models/transaction");
 
 router.post("/api/transaction", ({body}, res) => {
-  Transaction.create(body, { new: true, runValidators: true })
+  Transaction.create(body)
     .then(dbTransaction => {
       res.json(dbTransaction);
     })
@@ -12,7 +12,7 @@ router.post("/api/transaction", ({body}, res) => {
 });
 
 router.post("/api/transaction/bulk", ({body}, res) => {
-  Transaction.insertMany(body, { new: true, runValidators: true })
+  Transaction.insertMany(body)
     .then(dbTransaction => {
       res.json(dbTransaction);
     })
@@ -27,6 +27,7 @@ router.get("/api/transaction", (req, res) => {
       res.json(dbTransaction);
     })
     .catch(err => {
+      console.log("here is the error")
       res.status(404).json(err);
     });
 });
