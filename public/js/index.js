@@ -83,8 +83,6 @@ function sendTransaction(isAdding) {
   let amountEl = document.querySelector("#t-amount");
   let errorEl = document.querySelector(".form .error");
 
-  amountEl.value = "88";
-  nameEl.value = "name";
 
   // validate form
   if (nameEl.value === "" || amountEl.value === "") {
